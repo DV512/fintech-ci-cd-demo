@@ -4,7 +4,8 @@ phases:
   install:
     commands:
       - echo "Installing SSH client..."
-      - yum install -y openssh-clients
+      - apt-get update -y
+      - apt-get install -y openssh-client
 
   build:
     commands:
