@@ -3,10 +3,17 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Installing...
+      - echo "Installing SSH client..."
+      - yum install -y openssh-clients
+
   build:
     commands:
-      - echo Build started
+      - echo "Starting deployment to EC2..."
+      - echo "$EC2_KEY" > key.pem
+      - chmod 400 key.pem
+      - scp -o StrictHostKeyChecking=no -i key.pem index.html ec2-user@3.226.235.188:/tmp/index.html
+      - ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@3.226.235.188 "sudo mv /tmp/index.html /var/www/html/index.html"
+
   post_build:
     commands:
-      - echo Build completed
+      - echo "Deployment completed successfully"
