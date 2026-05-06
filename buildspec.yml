@@ -12,8 +12,8 @@ phases:
       - echo "Starting deployment to EC2..."
       - echo "$EC2_KEY" > key.pem
       - chmod 400 key.pem
-      - scp -o StrictHostKeyChecking=no -i fintech-qa-key.pem index.html ec2-user@3.226.235.188:/tmp/index.html
-      - ssh -o StrictHostKeyChecking=no -i fintech-qa-key.pem ec2-user@3.226.235.188 "sudo mv /tmp/index.html /var/www/html/index.html"
+      - scp -o StrictHostKeyChecking=no -i key.pem index.html ec2-user@3.226.235.188:/tmp/index.html
+      - ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@3.226.235.188 "sudo mv /tmp/index.html /var/www/html/index.html"
 
   post_build:
     commands:
